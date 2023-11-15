@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inventaris_mobile/models/product.dart';
 import 'package:inventaris_mobile/screens/add_product.dart';
 import 'package:inventaris_mobile/widgets/drawer.dart';
+import 'package:inventaris_mobile/widgets/productcard.dart';
 
 class ViewProductPage extends StatefulWidget {
   const ViewProductPage({Key? key}) : super(key: key);
@@ -26,28 +27,7 @@ class _ViewProductPageState extends State<ViewProductPage> {
           return ListView.builder(
             itemCount: products.length,
             itemBuilder: (BuildContext context, int index) {
-              return Card(
-                  child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(products[index].name,
-                        textAlign: TextAlign.left,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                    const SizedBox(height: 10),
-                    Text('Amount: ${products[index].amount}'),
-                    const SizedBox(height: 10),
-                    Text('Description: ${products[index].description}'),
-                    const SizedBox(height: 10),
-                    Text('Category: ${products[index].category}'),
-                    const SizedBox(height: 10),
-                    Text('Price: ${products[index].price}'),
-                  ],
-                ),
-              ));
+              return ProductCard(products[index]);
             },
           );
         }
