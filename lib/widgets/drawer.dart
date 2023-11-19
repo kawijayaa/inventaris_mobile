@@ -13,9 +13,14 @@ class LeftDrawer extends StatelessWidget {
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.indigo,
+              color: Colors.cyan,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
             ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
                   'INVENTARIS',
@@ -26,22 +31,12 @@ class LeftDrawer extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                Padding(padding: EdgeInsets.all(10)),
-                Text(
-                  "Write all your shopping needs here!",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.white,
-                  ),
-                ),
               ],
             ),
           ),
           ListTile(
             leading: const Icon(Icons.home_outlined),
-            title: const Text('Home Page'),
+            title: const Text('Home'),
             // redirect to MyHomePage
             onTap: () {
               Navigator.pushReplacement(
@@ -73,6 +68,20 @@ class LeftDrawer extends StatelessWidget {
                   builder: (context) => const AddProductPage(),
                 ),
               );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text('Logout'),
+            // redirect to ShopFormPage
+            onTap: () {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  const SnackBar(
+                    content: Text("You pressed the Logout button!"),
+                  ),
+                );
             },
           ),
         ],
