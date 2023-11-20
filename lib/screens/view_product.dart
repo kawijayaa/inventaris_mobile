@@ -5,6 +5,8 @@ import 'package:inventaris_mobile/models/product.dart';
 import 'package:inventaris_mobile/screens/add_product.dart';
 import 'package:inventaris_mobile/widgets/drawer.dart';
 import 'package:inventaris_mobile/widgets/productcard.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class ViewProductPage extends StatefulWidget {
   const ViewProductPage({Key? key}) : super(key: key);
@@ -14,15 +16,11 @@ class ViewProductPage extends StatefulWidget {
 }
 
 class _ViewProductPageState extends State<ViewProductPage> {
-  Future<List<Product>> fetchProduct() async {
-    var url = Uri.parse('http://localhost:8000/products/json/');
-    var response = await http.get(
-      url,
-      headers: {"Content-Type": "application/json"},
+  Future<List<Product>> fetchProduct(CookieRequest request) async {
+    var data = await request.get(
+      'http://localhost:8000/products/json/',
     );
-
     // decode the response to JSON
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
 
     // convert the JSON to Product object
     List<Product> products = [];
@@ -36,13 +34,14 @@ class _ViewProductPageState extends State<ViewProductPage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyan,
         title: const Text('View Products'),
       ),
       body: FutureBuilder(
-          future: fetchProduct(),
+          future: fetchProduct(request),
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
               return const Center(child: CircularProgressIndicator());

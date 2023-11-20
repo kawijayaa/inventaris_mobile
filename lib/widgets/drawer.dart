@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:inventaris_mobile/screens/add_product.dart';
+import 'package:inventaris_mobile/screens/login.dart';
 import 'package:inventaris_mobile/screens/menu.dart';
 import 'package:inventaris_mobile/screens/view_product.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Drawer(
       child: ListView(
         children: [
@@ -74,14 +78,24 @@ class LeftDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text('Logout'),
             // redirect to ShopFormPage
-            onTap: () {
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                  const SnackBar(
-                    content: Text("You pressed the Logout button!"),
-                  ),
-                );
+            onTap: () async {
+              final response = await request.logout(
+                    "http://muhammad-oka-tutorial.pbp.cs.ui.ac.id/auth/logout/");
+                String message = response["message"];
+                if (response['status']) {
+                  String uname = response["username"];
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("$message Good bye, $uname."),
+                  ));
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("$message"),
+                  ));
+                }
             },
           ),
         ],
