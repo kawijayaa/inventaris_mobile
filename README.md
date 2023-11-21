@@ -682,6 +682,14 @@
 
 </details>
 
+### Assignment 9
+
+<details>
+
+<summary></summary>
+
+</details>
+
 ## Assignment Essay
 
 <details>
@@ -726,5 +734,25 @@ The difference is, push() will push the screen to the top of the stack. pushRepl
 ## Clean Architecture in Flutter
 
 In Flutter, we divide the application into three layers: Presentation, Domain, and Data. The presentation layer handles the UI and user interaction. The domain layer is used to fetch the required data from the data layer and send it to the presentation layer.
+
+</details>
+
+<details>
+
+<summary>Assignment 9</summary>
+
+## Retrieving JSON data without a model
+
+You can retrieve JSON data without a model, but you cannot guarantee the data type constraint. So, it would be better to have a model before using JSON data.
+
+## CookieRequest
+
+CookieRequest is used to store cookies given by the Django web application. And it needs to be shared between components to keep the state. For example if you move to a different screen, you should still be logged in. And to achieve that, you need to share the cookies between components.
+
+## JSON fetching in Flutter
+
+## Authentication mechanism in Flutter
+
+## Widgets used
 
 </details>

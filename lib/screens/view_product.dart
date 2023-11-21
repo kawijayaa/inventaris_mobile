@@ -18,7 +18,7 @@ class ViewProductPage extends StatefulWidget {
 class _ViewProductPageState extends State<ViewProductPage> {
   Future<List<Product>> fetchProduct(CookieRequest request) async {
     var data = await request.get(
-      'http://localhost:8000/products/json/',
+      'https://muhammad-oka-tugas.pbp.cs.ui.ac.id/products/json/',
     );
     // decode the response to JSON
 

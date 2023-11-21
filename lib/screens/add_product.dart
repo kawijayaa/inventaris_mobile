@@ -193,7 +193,7 @@ class _AddProductPageState extends State<AddProductPage> {
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         final response = await request.postJson(
-                            "http://localhost:8000/api/products/create/",
+                            "https://muhammad-oka-tugas.pbp.cs.ui.ac.id/api/products/create/",
                             jsonEncode(<String, String>{
                               'name': _name,
                               'amount': _amount.toString(),
@@ -209,7 +209,7 @@ class _AddProductPageState extends State<AddProductPage> {
                           ));
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
+                            MaterialPageRoute(builder: (context) => ViewProductPage()),
                           );
                         } else {
                           ScaffoldMessenger.of(context)

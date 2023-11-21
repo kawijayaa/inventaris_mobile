@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   // Check credentials
                   final response =
-                      await request.login("http://localhost:8000/auth/login/", {
+                      await request.login("https://muhammad-oka-tugas.pbp.cs.ui.ac.id/auth/login/", {
                     'username': username,
                     'password': password,
                   });
